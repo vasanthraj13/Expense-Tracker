@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction History</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./History.js" defer></script>
+  <style>
+    .card {
+      perspective: 1000px;
+    }
+
+    .card-inner {
+      transition: transform 0.5s;
+      transform-style: preserve-3d;
+      width: 100%;
+      height: 100%;
+    }
+
+    .card:hover .card-inner {
+      transform: rotateY(10deg) rotateX(5deg);
+    }
+
+    .table-row {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .table-row:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+  <div class="flex justify-center items-center min-h-screen bg-gray-50 px-4">
+    <div class="card bg-white rounded-2xl shadow-2xl p-10 w-full max-w-5xl transform transition duration-500 hover:scale-105">
+      <h1 class="text-4xl text-center text-indigo-600 font-bold mb-8">Transaction History</h1>
+      <div class="overflow-x-auto rounded-lg shadow">
+        <table class="min-w-full bg-white rounded-lg overflow-hidden">
+          <thead class="bg-indigo-600 text-white">
+            <tr>
+              <th class="px-6 py-3 text-left text-sm font-medium">Date</th>
+              <th class="px-6 py-3 text-left text-sm font-medium">Name</th>
+              <th class="px-6 py-3 text-left text-sm font-medium">Amount</th>
+              <th class="px-6 py-3 text-left text-sm font-medium">Type</th>
+              <th class="px-6 py-3 text-left text-sm font-medium">Payment Method</th>
+            </tr>
+          </thead>
+          <tbody id="history-table" class="divide-y divide-gray-200">
+            <!-- Transactions will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+      <div class="flex justify-between items-center mt-6">
+        <button id="clear-history" class="px-4 py-2 bg-red-600 text-white rounded-lg shadow-lg transform transition duration-300 hover:scale-110 hover:bg-red-700 focus:outline-none">
+          Clear History
+        </button>
+        <a href="./Index.html" class="text-indigo-600 hover:underline font-medium">Back to Add Transaction</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    if (!localStorage.getItem('isLoggedIn')) {
+      window.location.href = './Login.html';
+    }
+  </script>
+</body>
+</html>

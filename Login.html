@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Expense Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./Login.js" defer></script>
+  <style>
+    
+    .form-container {
+      perspective: 1500px;
+    }
+
+    .form-card {
+      transition: transform 0.3s ease;
+      transform-style: preserve-3d;
+    }
+
+    .form-container:hover .form-card {
+      transform: rotateY(15deg) rotateX(10deg);
+    }
+
+    
+    .input-field,
+    .submit-button {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .input-field:focus,
+    .submit-button:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    
+    .input-field {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .submit-button {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    
+    .submit-button:hover {
+      transform: translateY(-6px);
+      background-color: #4338ca;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+
+  
+  <div class="flex justify-center items-center min-h-screen bg-gray-50 form-container">
+    <div class="bg-white rounded-xl shadow-xl p-10 w-full max-w-lg form-card">
+      <h1 class="text-4xl text-center text-indigo-600 mb-6">Login</h1>
+
+  
+      <form id="login-form" class="space-y-6">
+  
+        <input type="email" id="email" placeholder="Email" required class="input-field w-full p-4 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+
+        <input type="password" id="password" placeholder="Password" required class="input-field w-full p-4 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+
+  
+        <button type="submit" class="submit-button w-full p-4 bg-indigo-600 text-white rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:bg-indigo-700 focus:outline-none">Login</button>
+      </form>
+
+       <p class="text-center mt-6">
+        <span class="text-gray-600">Don't have an account? </span>
+        <a href="./Register.html" class="text-indigo-600 hover:underline">Create one</a>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

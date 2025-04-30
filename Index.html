@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./History.js" defer></script>
+  
+  <style>
+  
+    .transform-3d {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .transform-3d:hover {
+      transform: perspective(1000px) rotateY(15deg) rotateX(15deg) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 10px 15px rgba(0, 0, 0, 0.1);
+    } 
+
+   .animate-on-load {
+      animation: slideIn 0.8s ease-out forwards;
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    
+    @keyframes boomEffect {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 0.6;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 0, 0, 0.6);
+      }
+      100% {
+        transform: scale(0);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      }
+    }
+
+   
+    .boom {
+      animation: boomEffect 0.6s forwards;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+
+    <div class="flex justify-center items-center min-h-screen bg-gray-50">
+    <div class="bg-white rounded-xl shadow-xl p-10 w-full max-w-lg transform transition duration-500 hover:scale-105 animate-on-load">
+      <h1 class="text-4xl text-center text-indigo-600 mb-6">Income and Expense Tracker</h1>
+      
+          <form id="tracker-form" class="space-y-6">
+        
+        <input type="text" id="transaction-name" placeholder="Transaction Name" required class="w-full p-4 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transform-3d">
+        
+        
+        <input type="number" id="transaction-amount" placeholder="Amount" required class="w-full p-4 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transform-3d">
+        
+       
+        <input type="date" id="transaction-date" required class="w-full p-4 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transform-3d">
+        
+       
+        <select id="transaction-type" required class="w-full p-4 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transform-3d">
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+
+        
+        <select id="payment-method" required class="w-full p-4 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transform-3d">
+          <option value="paypal">PayPal</option>
+          <option value="stripe">Stripe</option>
+        </select>
+
+        
+        <button type="submit" class="w-full p-4 bg-indigo-600 text-white rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:bg-indigo-700 focus:outline-none transform-3d">
+          Add Transaction
+        </button>
+      </form>
+
+     
+      <p class="text-center mt-6 text-indigo-600">
+        <a href="./History.html" class="hover:underline">Go to Transaction History</a>
+      </p>
+
+            <div class="mt-6 flex justify-center">
+        <button id="logout-btn" class="p-2 bg-red-400 text-white rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:bg-red-500 focus:outline-none">
+          Log Out
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('tracker-form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+  
+      
+        let name = document.getElementById('transaction-name').value;
+        let amount = parseFloat(document.getElementById('transaction-amount').value); 
+        let date = document.getElementById('transaction-date').value;
+        let type = document.getElementById('transaction-type').value;
+        let method = document.getElementById('payment-method').value;
+  
+      
+        if (!name || isNaN(amount) || !date) {
+            alert("Please fill out all fields correctly.");
+            return;
+        }
+  
+  
+        let transaction = {
+            name,
+            amount,
+            date,
+            type,
+            method
+        };
+  
+      
+        let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+  
+      
+        transactions.push(transaction);
+  
+        
+        localStorage.setItem('transactions', JSON.stringify(transactions));
+  
+      
+        document.getElementById('tracker-form').reset();
+  
+        alert("Transaction added successfully!");
+  
+    
+        window.location.href = './History.html';
+    });
+  </script>
+  
+</body>
+</html>
